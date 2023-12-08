@@ -26,16 +26,18 @@ def search(request):
     soup = BeautifulSoup(data,'html.parser')
     #telling to soup in the html code and find all the list and in list class called cl-static-search-result 
     post_listing = soup.find_all('li',{'class' : 'cl-static-search-result'})
-    # print(post_listing)
     final_posting = []
     for post in post_listing:
         post_title = post.find(class_='title').text
-        post_url = post.find('a').get('href')
-        post_location = post.find(class_='location').text
+        post_url = post.find(class_='cl-thumb')
+        post_location = post.find(class_='location')
         final_posting.append((post_title,post_url,post_location))
+    length = len(final_posting)
+    print(length)
     #passing this to search.html to the front-end using dictionary
     front_end_stuff = {
         'search' : search_values,
         'final_posting' : final_posting,
+        'length' : length,
     }   
     return render(request, 'base/search.html',front_end_stuff)

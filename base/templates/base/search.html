@@ -1,22 +1,25 @@
-{% extends 'base/index.html' %}
-{% load static %}
-{% block content  %}
-    <div class="row">
-{% for post in final_posting%}
-        <div class="col s4">
-            <div class="card">
-                <div class="card-image">
-                    <a href="{{ post.1 }}"><img src="{% static 'images/A.png' %}" alt=""></a>
-                </div>
-                <div class="card-content">
-                    <p>{{post.0}}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{{ post.1 }}"> see more details</a>
-                </div>
-            </div>
-        </div>
-{% endfor %} 
+{% extends 'base/index.html' %} {% load static %} {% block content %}
+<div class="row">
+  {% if length == 0 %}
+  <p>No Result Found, Try Somthing Else</p>
+  {% else %} {% for post in final_posting%}
+  <div class="col s4">
+    <div class="card">
+      <div class="card-image">
+        <a href="{{ post.1 }}"
+          ><img src="{% static 'images/A.png' %}" alt=""
+        /></a>
+      </div>
+      <div class="card-content">
+        <p>{{post.0}}</p>
+      </div>
+      <div class="card-action">
+        <a href="{{ post.1 }}"> see more details</a>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
 
-{% endblock content  %}
+{% endblock content %}
